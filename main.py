@@ -14,17 +14,17 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="我的第一个 Python 项目")
     parser.add_argument("--name", default="同学", help="要问候的人")
     parser.add_argument("--repeat", type=int, default=1, help="重复次数")
+    parser.add_argument("--upper", action="store_true", help="输出转为大写")
     return parser.parse_args(argv)
 
 
 def main() -> int:
     args = parse_args()
-    if args.repeat < 1:
-        print("错误：--repeat 必须大于 0", file=sys.stderr)
-        return 1
-    print(build_greeting(args.name, args.repeat))
-    return 0
-
+  
+    result = build_greeting(args.name, args.repeat)
+    if args.upper:
+        result = result.upper()
+    print(result)
 
 if __name__ == "__main__":
     raise SystemExit(main())
