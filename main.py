@@ -20,11 +20,14 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
 
 def main() -> int:
     args = parse_args()
-  
+    if args.repeat < 1:
+        print("错误：--repeat 必须大于 0", file=sys.stderr)
+        return 1
     result = build_greeting(args.name, args.repeat)
     if args.upper:
         result = result.upper()
     print(result)
+    return 0
 
 if __name__ == "__main__":
     raise SystemExit(main())
